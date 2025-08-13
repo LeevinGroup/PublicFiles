@@ -39,5 +39,28 @@ if [ "$confirm_push" != "y" ]; then
 fi
 
 git push
+echo ""
 
+# Get the list of committed files from the last commit
+committed_files=$(git diff-tree --no-commit-id --name-only -r HEAD)
+
+changed_files=""
+
+while IFS= read -r file; do
+  if [[ "$file" == $repo_path_prefix* ]]; then
+    relative_path="${file#$repo_path_prefix}"
+    url_path="${relative_path// /%20}"
+    changed_files+="$base_url$url_path
+"
+  fi
+done <<< "$committed_files"
+
+if [ -n "$changed_files" ]; then
+  echo "URLs of added/modified files in files/EmailSignatures:"
+  echo -e "$changed_files"
+else
+  echo "No added or modified files in files/EmailSignatures to display URLs."
+fi
+
+echo ""
 handle_exit "Commit pushed to remote. Press enter to exit."
