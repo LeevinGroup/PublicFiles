@@ -1,3 +1,3 @@
-# PublicFiles
+# Leevin Group
 
-![test image file](./files/EmailSignatures/test.png)
+![Leevin Group logo](./files/LeevinGroup_newLogo.png)
