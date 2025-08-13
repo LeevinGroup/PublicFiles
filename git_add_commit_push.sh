@@ -39,5 +39,5 @@ if [ "$confirm_push" != "y" ]; then
 fi
 
 git push
-
+echo ""
 handle_exit "Commit pushed to remote. Press enter to exit."
